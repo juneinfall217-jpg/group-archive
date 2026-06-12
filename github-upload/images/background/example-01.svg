@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-label="项目背景资料示例图">
+  <rect width="960" height="720" fill="#e8f4f0"/>
+  <rect x="90" y="92" width="780" height="536" rx="28" fill="#fff" stroke="#bfd8d1" stroke-width="4"/>
+  <path d="M168 506h624" stroke="#1f7a68" stroke-width="12" stroke-linecap="round"/>
+  <path d="M220 454l122-166 112 126 76-86 202 126z" fill="#8ec7ba"/>
+  <circle cx="692" cy="228" r="58" fill="#f2c36b"/>
+  <text x="480" y="596" text-anchor="middle" font-size="42" font-family="Arial, sans-serif" font-weight="700" fill="#172026">背景资料</text>
+</svg>

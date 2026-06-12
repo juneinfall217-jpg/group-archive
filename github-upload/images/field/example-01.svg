@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-label="实地调研图片示例图">
+  <rect width="960" height="720" fill="#eaf0f5"/>
+  <path d="M0 510c120-58 228-76 324-54 104 24 182 92 302 74 102-16 184-82 334-50v240H0z" fill="#8aa9b8"/>
+  <path d="M136 464l154-190 128 160 94-112 254 142z" fill="#5f8b7f"/>
+  <circle cx="704" cy="174" r="62" fill="#f3efe8"/>
+  <rect x="114" y="548" width="732" height="76" rx="18" fill="#fff" opacity=".9"/>
+  <text x="480" y="598" text-anchor="middle" font-size="42" font-family="Arial, sans-serif" font-weight="700" fill="#172026">实地图片</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-label="参考案例示例图">
+  <rect width="960" height="720" fill="#eef3f7"/>
+  <rect x="132" y="120" width="250" height="420" rx="18" fill="#fff" stroke="#c9d7e1" stroke-width="4"/>
+  <rect x="426" y="120" width="402" height="420" rx="18" fill="#fff" stroke="#c9d7e1" stroke-width="4"/>
+  <rect x="170" y="168" width="174" height="132" rx="10" fill="#286a9f" opacity=".72"/>
+  <rect x="466" y="168" width="322" height="42" rx="8" fill="#1f7a68" opacity=".82"/>
+  <rect x="466" y="246" width="242" height="36" rx="8" fill="#93b8c8"/>
+  <rect x="466" y="316" width="292" height="36" rx="8" fill="#93b8c8"/>
+  <rect x="466" y="386" width="198" height="36" rx="8" fill="#93b8c8"/>
+  <text x="480" y="626" text-anchor="middle" font-size="42" font-family="Arial, sans-serif" font-weight="700" fill="#172026">参考案例</text>
+</svg>

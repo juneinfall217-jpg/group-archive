@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>小组项目资料库</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Group Archive</p>
+        <h1>小组项目资料库</h1>
+      </div>
+      <div class="stats" aria-label="资料统计">
+        <span id="totalCount">0 张图片</span>
+        <span id="categoryCount">0 个分类</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="intro-title">
+        <div>
+          <h2 id="intro-title">把图片资料整理成可检索的项目入口</h2>
+          <p>
+            按分类浏览、按关键词搜索、用标签筛选，组员打开网页就能找到需要的图片资料。
+          </p>
+        </div>
+        <div class="intro-actions">
+          <a class="button primary" href="#gallery">查看资料</a>
+          <a class="button" href="./README.md">添加说明</a>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="筛选工具">
+        <label class="search">
+          <span>搜索</span>
+          <input id="searchInput" type="search" placeholder="输入标题、备注、来源或标签" />
+        </label>
+        <label class="select">
+          <span>分类</span>
+          <select id="categorySelect">
+            <option value="all">全部分类</option>
+          </select>
+        </label>
+        <label class="select">
+          <span>标签</span>
+          <select id="tagSelect">
+            <option value="all">全部标签</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="quick-filters" aria-label="快捷筛选">
+        <button class="chip active" type="button" data-filter="all">全部</button>
+        <button class="chip" type="button" data-filter="featured">重点</button>
+        <button class="chip" type="button" data-filter="ppt">适合汇报</button>
+        <button class="chip" type="button" data-filter="todo">待补充说明</button>
+      </section>
+
+      <section id="gallery" class="gallery" aria-live="polite"></section>
+
+      <p id="emptyState" class="empty" hidden>
+        没有找到匹配的资料。换个关键词或筛选条件试试。
+      </p>
+    </main>
+
+    <dialog id="viewer" class="viewer" aria-label="图片查看器">
+      <button class="icon-button close" id="closeViewer" type="button" aria-label="关闭">×</button>
+      <button class="icon-button nav prev" id="prevImage" type="button" aria-label="上一张">‹</button>
+      <figure>
+        <img id="viewerImage" alt="" />
+        <figcaption>
+          <div>
+            <p id="viewerCategory" class="viewer-category"></p>
+            <h2 id="viewerTitle"></h2>
+            <p id="viewerNote"></p>
+            <p id="viewerSource" class="viewer-source"></p>
+          </div>
+          <a id="viewerDownload" class="button primary" href="#" download>下载图片</a>
+        </figcaption>
+      </figure>
+      <button class="icon-button nav next" id="nextImage" type="button" aria-label="下一张">›</button>
+    </dialog>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
