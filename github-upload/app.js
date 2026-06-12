@@ -23,6 +23,13 @@ const nextImage = document.querySelector("#nextImage");
 let activeQuickFilter = "all";
 let visibleItems = [...items];
 let activeIndex = 0;
+let renderedCount = 0;
+
+const batchSize = 48;
+const loadMoreButton = document.createElement("button");
+loadMoreButton.className = "button load-more";
+loadMoreButton.type = "button";
+loadMoreButton.addEventListener("click", () => renderNextBatch());
 
 function unique(values) {
   return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, "zh-CN"));
@@ -43,6 +50,14 @@ function fillSelect(select, values) {
 
 function getTags(item) {
   return Array.isArray(item.tags) ? item.tags : [];
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function placeholderFor(item) {
@@ -78,25 +93,39 @@ function applyFilters() {
 
 function renderGallery() {
   gallery.innerHTML = "";
+  renderedCount = 0;
+  renderNextBatch();
 
-  visibleItems.forEach((item, index) => {
+  emptyState.hidden = visibleItems.length > 0;
+}
+
+function renderNextBatch() {
+  const start = renderedCount;
+  const nextItems = visibleItems.slice(start, start + batchSize);
+  const fragment = document.createDocumentFragment();
+
+  nextItems.forEach((item, offset) => {
+    const index = start + offset;
     const card = document.createElement("article");
     card.className = "item";
 
     const tags = getTags(item);
+    const safeTitle = escapeHtml(item.title);
+    const safeCategory = escapeHtml(item.category || "未分类");
+    const safeNote = escapeHtml(item.note || "暂无说明");
     card.innerHTML = `
-      <button class="thumb-button" type="button" aria-label="查看 ${item.title}">
-        <img class="thumb" src="${item.image}" alt="${item.title}" loading="lazy" />
+      <button class="thumb-button" type="button" aria-label="查看 ${safeTitle}">
+        <img class="thumb" src="${item.image}" alt="${safeTitle}" loading="lazy" decoding="async" />
       </button>
       <div class="content">
         <div class="meta">
-          <span>${item.category || "未分类"}</span>
+          <span>${safeCategory}</span>
           ${item.featured ? '<span class="badge featured">重点</span>' : '<span class="badge">资料</span>'}
         </div>
-        <h3>${item.title}</h3>
-        <p>${item.note || "暂无说明"}</p>
+        <h3>${safeTitle}</h3>
+        <p>${safeNote}</p>
         <div class="tags">
-          ${tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+          ${tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
         </div>
       </div>
     `;
@@ -107,10 +136,20 @@ function renderGallery() {
     }, { once: true });
 
     card.querySelector("button").addEventListener("click", () => openViewer(index));
-    gallery.append(card);
+    fragment.append(card);
   });
 
-  emptyState.hidden = visibleItems.length > 0;
+  gallery.append(fragment);
+  renderedCount += nextItems.length;
+
+  loadMoreButton.textContent = `加载更多（${Math.min(batchSize, visibleItems.length - renderedCount)} / 还剩 ${Math.max(visibleItems.length - renderedCount, 0)} 张）`;
+  loadMoreButton.hidden = renderedCount >= visibleItems.length;
+
+  if (!loadMoreButton.hidden && loadMoreButton.parentElement !== gallery.parentElement) {
+    gallery.insertAdjacentElement("afterend", loadMoreButton);
+  } else if (!loadMoreButton.hidden) {
+    gallery.after(loadMoreButton);
+  }
 }
 
 function openViewer(index) {
